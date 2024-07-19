@@ -4,3 +4,11 @@
 .idea/
 *.iml
 build/
+
+.gradle/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.iws
