@@ -1,6 +1,7 @@
 package steps;
 
 import io.cucumber.java.en.*;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import pages.LandingPage;
 import pages.LoginModal;
@@ -12,20 +13,29 @@ public class LoginSteps {
     MainPage mainPage = new MainPage();
 
     @Given("the user is on the login page")
-    public void the_user_is_on_the_login_page() {
+    public void navigateToLoginPage() {
         landingPage.navigateToURL();
         landingPage.clickLoginButton();
     }
     @When("the user enters their email and password")
-    public void the_user_enters_their_email_and_password() {
+    public void enterValidCredentials() {
     loginModal.loginFields("succesfullLogin@gmail.com","succesfullLoginpwd");
     }
     @When("the user clicks the login button")
-    public void the_user_clicks_the_login_button() {
+    public void theUserClicksLoginButton() {
         loginModal.clickLoginButton();
     }
     @Then("the user should be redirected to the home page")
-    public void the_user_should_be_redirected_to_the_home_page() {
+    public void assertUserIsOnHomePage() {
         Assert.assertTrue(mainPage.isElementVisible(mainPage.getLogoutButton()));
+    }
+
+    @When("the user enter their {} and {}")
+    public void enterInvalidCredentials(String email, String pwd) {
+        loginModal.loginFields(email, pwd);
+    }
+    @Then("the user should see an error message")
+    public void verifyErrorMessageDisplayed() {
+        Assert.assertEquals(landingPage.getErrorMessage(),"Wrong email or password. Please try again. Forgot your password? You can retrieve it using the form below.");
     }
 }

@@ -39,6 +39,9 @@ public class BasePage {
     private WebElement find(String locator){
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
     }
+    public String getText(String locator){
+        return find(locator).getText();
+    }
     public boolean isElementVisible(String locator){
         return find(locator).isDisplayed();
     }
