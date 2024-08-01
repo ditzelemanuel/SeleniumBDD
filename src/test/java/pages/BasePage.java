@@ -24,53 +24,53 @@ public class BasePage {
         driver = new ChromeDriver();
     }
 
-    public BasePage(WebDriver driver){
+    public BasePage(WebDriver driver) {
         BasePage.driver = driver;
     }
 
-    public static void navigateTo(String url){
+    public static void navigateTo(String url) {
         driver.get(url);
     }
 
-    public static void closeBrowser(){
+    public static void closeBrowser() {
         driver.quit();
     }
 
-    private WebElement find(String locator){
+    private WebElement find(String locator) {
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
     }
-    public String getText(String locator){
+    public String getText(String locator) {
         return find(locator).getText();
     }
-    public boolean isElementVisible(String locator){
+    public boolean isElementVisible(String locator) {
         return find(locator).isDisplayed();
     }
-    public void clickElement(String locator){
+    public void clickElement(String locator) {
         find(locator).click();
     }
 
-    public void write(String locator, String keysToSend){
+    public void write(String locator, String keysToSend) {
         find(locator).clear();
         find(locator).sendKeys(keysToSend);
     }
 
-    public void selectDropdownByValue(String locator, String value){
+    public void selectDropdownByValue(String locator, String value) {
         Select dropdown = new Select(find(locator));
         dropdown.selectByValue(value);
     }
 
-    public void selectDropdownByIndex(String locator, int index){
+    public void selectDropdownByIndex(String locator, int index) {
         Select dropdown = new Select(find(locator));
         dropdown.selectByIndex(index);
     }
 
-    public int dropdownSize(String locator){
+    public int dropdownSize(String locator) {
         Select dropdown = new Select(find(locator));
         List<WebElement> elements = dropdown.getOptions();
         return elements.size();
     }
 
-    public List<String> getDropdownValues(String locator){
+    public List<String> getDropdownValues(String locator) {
         Select dropdown = new Select(find(locator));
         List<WebElement> dropdownOptions = dropdown.getOptions();
         List<String> values = new ArrayList<>();

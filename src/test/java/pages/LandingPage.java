@@ -2,10 +2,6 @@ package pages;
 
 public class LandingPage extends BasePage {
 
-    private String loginButton = "//div[@class='HPHeaderLogin']/a";
-    private String singUpButton = "//div[@class='HPHeaderSignup']/a";
-    private String errorMessage = "//span[@id=\"ErrorMessageText\"]";
-
     public LandingPage(){
         super(driver);
     }
@@ -14,12 +10,15 @@ public class LandingPage extends BasePage {
         navigateTo("https://todo.ly/");
     }
     public void clickLoginButton(){
+        String loginButton = "//div[@class='HPHeaderLogin']/a";
         clickElement(loginButton);
     }
     public void clickSignUpButton(){
+        String singUpButton = "//div[@class='HPHeaderSignup']/a";
         clickElement(singUpButton);
     }
     public String getErrorMessage(){
+        String errorMessage = "//span[@id=\"ErrorMessageText\"]";
         return getText(errorMessage);
     }
 }

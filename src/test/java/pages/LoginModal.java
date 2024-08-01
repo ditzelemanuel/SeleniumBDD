@@ -2,18 +2,19 @@ package pages;
 
 public class LoginModal extends BasePage {
 
-    private String emailField = "//input[@id='ctl00_MainContent_LoginControl1_TextBoxEmail']";
-    private String pwdField = "//input[@id='ctl00_MainContent_LoginControl1_TextBoxPassword']";
-    private String loginButton = "//input[@id='ctl00_MainContent_LoginControl1_ButtonLogin']";
-
     public LoginModal() {
         super(driver);
     }
-    public void loginFields(String email, String password){
-        write(emailField,email);
+
+    public void loginFields(String email, String password) {
+        String emailField = "//input[@id='ctl00_MainContent_LoginControl1_TextBoxEmail']";
+        String pwdField = "//input[@id='ctl00_MainContent_LoginControl1_TextBoxPassword']";
+        write(emailField, email);
         write(pwdField, password);
     }
-    public void clickLoginButton(){
+
+    public void clickLoginButton() {
+        String loginButton = "//input[@id='ctl00_MainContent_LoginControl1_ButtonLogin']";
         clickElement(loginButton);
     }
 }

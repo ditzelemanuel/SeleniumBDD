@@ -1,14 +1,16 @@
 package pages;
 
-public class MainPage extends BasePage{
+public class MainPage extends BasePage {
 
     private final String logoutButton = "//a[@id='ctl00_HeaderTopControl1_LinkButtonLogout']";
-
-    public MainPage(){
+    public MainPage() {
         super(driver);
     }
 
     public String getLogoutButton() {
         return logoutButton;
+    }
+    public void clickLogoutButton(){
+        clickElement(logoutButton);
     }
 }

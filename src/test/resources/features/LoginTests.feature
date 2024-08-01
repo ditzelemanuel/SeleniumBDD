@@ -17,8 +17,8 @@ Feature: Login
     Then the user should see an error message
 
     Examples:
-    |email                    |password           |
-    |succesfullLogin@gmail.com|wrongpassword      |
-    |                         |succesfullLoginpwd |
-    |succesfullLogin@gmail.com|                   |
-    |invalidLogin@gmail.com   |succesfullLoginpwd |
+      | email                     | password           |
+      | succesfullLogin@gmail.com | wrongpassword      |
+      |                           | succesfullLoginpwd |
+      | succesfullLogin@gmail.com |                    |
+      | invalidLogin@gmail.com    | succesfullLoginpwd |
