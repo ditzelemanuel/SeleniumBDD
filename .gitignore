@@ -3,7 +3,7 @@
 /.idea/workspace.xml
 .idea/
 *.iml
-build/
+/build/
 
 .gradle/
 *.class

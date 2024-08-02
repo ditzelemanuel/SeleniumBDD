@@ -39,12 +39,15 @@ public class BasePage {
     private WebElement find(String locator) {
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
     }
+
     public String getText(String locator) {
         return find(locator).getText();
     }
+
     public boolean isElementVisible(String locator) {
         return find(locator).isDisplayed();
     }
+
     public void clickElement(String locator) {
         find(locator).click();
     }
@@ -79,5 +82,25 @@ public class BasePage {
             values.add(option.getText());
         }
         return values;
+    }
+
+    public void selectOptionByPartialText(String locator, String text) {
+        Select dropdown = new Select(find(locator));
+        List<WebElement> options = dropdown.getOptions();
+        for (WebElement option : options) {
+            if (option.getText().contains(text)){
+                option.click();
+            }
+        }
+    }
+    public void selectCheckbox(String locator) {
+        WebElement checkbox = find(locator);
+        if (!checkbox.isSelected()){
+            checkbox.click();
+        }
+    }
+    public boolean isCheckboxSelected(String locator) {
+        WebElement checkbox = find(locator);
+        return checkbox.isSelected();
     }
 }
