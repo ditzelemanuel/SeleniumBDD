@@ -1,8 +1,10 @@
 package pages;
 
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,24 +18,43 @@ import java.util.List;
 public class BasePage {
 
     protected static WebDriver driver;
+    protected WebDriverWait wait;
 
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
-    static {
+    public static void startDriver() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     }
 
     public BasePage(WebDriver driver) {
+        if (driver == null) {
+            throw new IllegalStateException("Driver is not initialized.");
+        }
         BasePage.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
 
     public static void navigateTo(String url) {
-        driver.get(url);
+        if (driver != null) {
+            driver.get(url);
+        } else {
+            throw new IllegalStateException("Driver is not initialized.");
+        }
     }
 
     public static void closeBrowser() {
-        driver.quit();
+        if (driver != null) {
+            try {
+                driver.quit();
+            } catch (WebDriverException e) {
+                System.out.println("Exception occurred while quitting the driver: " + e.getMessage());
+            } finally {
+                driver = null; // Asegúrate de que el driver se establece a null después de cerrarlo
+            }
+        }
+    }
+
+    public static WebDriver getDriver() {
+        return driver;
     }
 
     private WebElement find(String locator) {
@@ -99,8 +120,15 @@ public class BasePage {
             checkbox.click();
         }
     }
+    public void deselectCheckbox(String locator) {
+        WebElement checkbox = find(locator);
+        if (checkbox.isSelected()){
+            checkbox.click();
+        }
+    }
     public boolean isCheckboxSelected(String locator) {
         WebElement checkbox = find(locator);
         return checkbox.isSelected();
     }
 }
+//
