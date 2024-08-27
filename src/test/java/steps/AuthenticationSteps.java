@@ -1,22 +1,34 @@
 package steps;
 
 import io.cucumber.java.en.*;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import pages.LandingPage;
-import pages.LoginModal;
-import pages.MainPage;
-import pages.RegisterModal;
+import pages.*;
 
-public class LoginSteps {
-    LandingPage landingPage = new LandingPage();
-    LoginModal loginModal = new LoginModal();
-    MainPage mainPage = new MainPage();
-    RegisterModal register = new RegisterModal();
+public class AuthenticationSteps {
+    private final LandingPage landingPage;
+    private final LoginModal loginModal;
+    private final MainPage mainPage;
+    private final RegisterModal register;
+
+    public AuthenticationSteps(){
+        WebDriver driver = BasePage.getDriver();
+        this.landingPage = new LandingPage(driver);
+        this.loginModal = new LoginModal(driver);
+        this.register = new RegisterModal(driver);
+        this.mainPage = new MainPage(driver);
+    }
 
     @Given("the user is on the login page")
     public void navigateToLoginModal() {
         landingPage.navigateToURL();
         landingPage.clickLoginButton();
+    }
+
+    @Given("the user is on the registration page")
+    public void navigateToRegisterModal() {
+        landingPage.navigateToURL();
+        landingPage.clickSignUpButton();
     }
 
     @When("the user enters their email and password")
@@ -39,37 +51,31 @@ public class LoginSteps {
         loginModal.loginFields(email, pwd);
     }
 
-    @Then("the user should see an error message")
-    public void verifyErrorMessageDisplayed() {
-        //Assert.assertEquals(landingPage.getErrorMessage(), "Wrong email or password. Please try again. Forgot your password? You can retrieve it using the form below.");
-        Assert.assertEquals(landingPage.getErrorMessage(), "Please correct the missing fields.");
+    @Then("the user should see an {}")
+    public void verifyErrorMessageDisplayed(String errorMessage) {
+        Assert.assertEquals(landingPage.getErrorMessage(), errorMessage);
     }
-    @Given("the user is on the registration page")
-    public void navigateToRegisterModal(){
-        landingPage.navigateToURL();
-        landingPage.clickSignUpButton();
-    }
+
     @When("the user registers with {}, {}, {} and {}")
-    public void registerUserWithDetails(String fullName, String email, String password, String timezone){
+    public void registerUserWithDetails(String fullName, String email, String password, String timezone) {
         register.enterFullName(fullName);
         register.enterEmail(email);
         register.enterPassword(password);
         register.selectTimezone(timezone);
     }
+
     @And("the user accepts the terms of service")
-    public void acceptTermsOfService(){
+    public void acceptTermsOfService() {
         register.acceptTerms();
     }
+
     @And(("the user does not accept the terms of service"))
-    public void declineTermsOfService(){
+    public void declineTermsOfService() {
         register.declineTerms();
     }
+
     @And("the user clicks the register button")
-    public void clickRegisterButton(){
+    public void clickRegisterButton() {
         register.clickSignUpButton();
-    }
-    @Then("the user should see the main page")
-    public void verifyUserSeesMainPage(){
-        Assert.assertTrue(mainPage.isElementVisible(mainPage.getLogoutButton()));
     }
 }
