@@ -26,6 +26,10 @@ dependencies {
 
     // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
     implementation 'io.github.bonigarcia:webdrivermanager:5.8.0'
+
+    // https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber7-jvm
+    implementation 'io.qameta.allure:allure-cucumber7-jvm:2.29.0'
+
 }
 
 test {

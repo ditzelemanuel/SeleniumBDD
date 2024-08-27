@@ -4,6 +4,7 @@
 .idea/
 *.iml
 /build/
+allure-results/
 
 .gradle/
 *.class
