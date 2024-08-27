@@ -1,8 +1,10 @@
 package pages;
 
+import org.openqa.selenium.WebDriver;
+
 public class LandingPage extends BasePage {
 
-    public LandingPage(){
+    public LandingPage(WebDriver driver){
         super(driver);
     }
 
@@ -14,7 +16,7 @@ public class LandingPage extends BasePage {
         clickElement(loginButton);
     }
     public void clickSignUpButton(){
-        String singUpButton = "//div[@class='HPHeaderSignup']/a";
+        String singUpButton = "//div[@class='HPHeaderSignup']";
         clickElement(singUpButton);
     }
     public String getErrorMessage(){

@@ -1,8 +1,10 @@
 package pages;
 
+import org.openqa.selenium.WebDriver;
+
 public class LoginModal extends BasePage {
 
-    public LoginModal() {
+    public LoginModal(WebDriver driver) {
         super(driver);
     }
 

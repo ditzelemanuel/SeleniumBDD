@@ -48,7 +48,7 @@ public class BasePage {
             } catch (WebDriverException e) {
                 System.out.println("Exception occurred while quitting the driver: " + e.getMessage());
             } finally {
-                driver = null; // Asegúrate de que el driver se establece a null después de cerrarlo
+                driver = null;
             }
         }
     }

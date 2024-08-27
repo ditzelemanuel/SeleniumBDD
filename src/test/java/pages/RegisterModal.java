@@ -1,9 +1,11 @@
 package pages;
 
+import org.openqa.selenium.WebDriver;
+
 public class RegisterModal extends BasePage {
 
     private final String checkbox = "//input[@id='ctl00_MainContent_SignupControl1_CheckBoxTerms']";
-    public RegisterModal(){
+    public RegisterModal(WebDriver driver){
         super(driver);
     }
 
